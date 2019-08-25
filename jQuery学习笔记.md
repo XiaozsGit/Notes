@@ -517,27 +517,9 @@ console.log($('span').data('spanindex'));
 
   
 
-  
 
   
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
 

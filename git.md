@@ -57,20 +57,22 @@ checkout
 
 # 提交步骤
 
+- **注意：** 在本地上传时，要注意 github 中的内容要与 git 中的一致，若是 GitHub 中的内容大于 git 中，要 先拉取，再上传（readme）
+
 - **提交到本地仓库**
 
 ```js
-// 第一次使用 git 要进行配置
+// 1.第一次使用 git 要进行配置
 git config global user.name '用户名'
 git config global user.email '邮箱'
 
-// 对选择的文件夹进行初始化，创建本地仓库
+// 2.对选择的文件夹进行初始化，创建本地仓库
 git init
 
-// 添加工作区的文件到暂存区
+// 3.添加工作区的文件到暂存区
 git add .
 
-// 提交暂存区的文件到本地仓库
+// 4.提交暂存区的文件到本地仓库
 git commit -m '描述信息'
 ```
 
@@ -79,7 +81,7 @@ git commit -m '描述信息'
 - **设置 `ssh key`**
 
 ```js
-// 设置 ssh 密钥   
+// 设置 ssh 密钥   只要进行一次
 ssh-keygen -t rsa -C "youremail@example.com"
 
 // 去路径中查找 id_rsa.pub 文件，打开复制里面内容，前往 github 中，设置 setting => SSH and GPG keys ,描述随意填写，下面的文本域粘贴 id_rsa.pub 中内容 确定
@@ -92,18 +94,43 @@ ssh-keygen -t rsa -C "youremail@example.com"
 ```js
 // 第一种情况，不使用 readme 文件
 
-// 关联 git 与 github 中的仓库 （origin 是地址的别名，）
+// 6.关联 git 与 github 中的仓库 （origin 是地址的别名，）
 git remote add origin 仓库地址
 
-// 提交到GitHub (第一次提交需要使用 -u 以后则不用)
+// 7.提交到GitHub (第一次提交需要使用 -u 以后则不用)
 // -u 表示记录推送到哪，以后使用可以直接 git push 不用 remote 地址了
 git push -u origin master
 // git push -u origin   master:master
 // 远程是master时可省略  本地分支:远程分支
+
+
 ```
 
 ```js
-// 第二种情况，使用了 readme 文件（GitHub中存在readme文件，本地git没有，所以会报错要合并）
+// 第二种情况，使用了 readme 文件（GitHub中存在readme文件，本地git没有，所以会报错要先拉取下来）
+git pull --rebase origin master
+
+// 然后在上传
+git push -u origin master
+
+
+```
+
+# 克隆
+
+- 把 GitHub 中的仓库克隆下来 
+
+
+
+```js
+// 克隆到本地
+git clone 仓库地址
+
+// 拉取
+git pull --rebase origin master
+
+// 上传
+git push -u origin master
 
 ```
 
