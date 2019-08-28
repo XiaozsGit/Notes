@@ -214,12 +214,10 @@
   - 外部添加（element 的兄弟）
     - element.after(''内容'')                       把内容放入目标元素后面
     - element.before(''内容'')                    把内容放入目标元素前面 
-
-- **删除元素**
+- **删除元素** 
   - element.remove()                                   删除匹配的元素本身
   - element.empty()                                     删除匹配的元素集合中所有的子节点
   - element.html('''')                                     清空匹配的元素内容（删除所有子节点），以‘’进行覆盖，达到删除效果
-
 - 改        可以使用.html('内容')达到修改效果
 
 ### 遍历元素
@@ -518,7 +516,7 @@ console.log($('span').data('spanindex'));
   
 
 
-  
+
 
 
   

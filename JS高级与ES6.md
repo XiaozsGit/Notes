@@ -40,33 +40,34 @@
 - 静态成员
 
   - 构造函数本身也是一个对象，所以它也可以使用 obj.xxx = xxx  来定义其对象属性，这种称为 静态成员（属性与方法）属于构造方法本身的，new的对象不可以访问
-
 - 实例成员
 
   - 在构造函数内使用this.xxx 创建的，实际上是new了一个实例对象并且对 实例对象.xxx 的操作，该属性，方法是存在于new 出来的实例对象中的，构造函数不可以访问
-
 - **注意这两个对象不可以混淆的调用，只能各调各的**
 
-  ```js
-  function Gouzao (name) {
-  	
-      this.name = name;
-      this.say = function() {
-  		console.log('我是实例成员!');
-      }
-  	
-  }
-  
-  // 静态成员
-  Gouzao.name = '这是静态成员';
-  
-  // 实例成员
-  var obj = new Gouzao('实例成员');
-  obj.name;
-  obj.say();
-  ```
 
-  
+
+
+
+```js
+    function Gouzao (name) {
+
+        this.name = name;
+        this.say = function() {
+            console.log('我是实例成员!');
+        }	
+    }
+
+    // 静态成员
+    Gouzao.name = '这是静态成员';
+
+    // 实例成员
+    var obj = new Gouzao('实例成员');
+    obj.name;
+    obj.say();
+```
+
+
 
 
 
@@ -197,6 +198,8 @@
   ```js
   fun.apply(thisArg, [arg1, arg2, arg3 ....])
   // 必须以数组方式传入参数，其他的与 call一样
+  
+  Math.max.apply(this,[1,2,3,4,5]);
   ```
 
   

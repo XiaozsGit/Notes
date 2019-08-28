@@ -1,4 +1,3 @@
-
 # git 的 基本命令
 
 ```js
@@ -134,4 +133,27 @@ git push -u origin master
 
 ```
 
-git
+# 还原
+
+```js
+// 还原至某一版本，版本号可以通过 git log 查看，前5位 或 前7位
+git checkout 版本号
+
+// 把本地仓库中上一个版本还原到暂存区中
+git reset ;
+```
+
+
+
+# 分支
+
+```js
+// 创建分支
+git branch 分支名 
+// 跳转分支
+git checkout 分支名
+
+// 创建并直接跳转到分支
+git checkout -b 分支名
+```
+

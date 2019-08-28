@@ -92,7 +92,7 @@ clearInterval(timer);
 	location.href = 'http://www.jd.com';
 ```
 
-- 方法：location.search();获取地址栏中？后的数据，包含？
+- 方法：location.search();获取地址栏中 在 ？后的数据，包含？
 
 
 
@@ -502,7 +502,7 @@ dom.style.width；
   ```
 
 - **注意：**
-  - 不能使用on的方式注册，只有addEventListener才可以成功注册
+  - **不能使用on的方式注册，只有addEventListener才可以成功注册**
   - 如果帧动画是**无限次**的，不会触发该事件animationend
 
 ## 多个按键同时按下！
@@ -696,7 +696,7 @@ function tap(element, callback, offset, timeSpan) {
 
 
 
-# 属性
+# 标签属性
 
 - 元素.getAttribute(属性名)                                          获取需要的属性值
 
