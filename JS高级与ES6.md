@@ -118,9 +118,8 @@
   
   }	
   Father.	say : function() {
-  		console.log(我姓萧);
-      }
-  
+  	console.log(我姓萧);
+  }
   
   function Son () {
   	
@@ -154,7 +153,6 @@
   
   // 修改子元素的构造函数
   Son.prototype.constructor = Son;
-  
   ```
 
   
@@ -211,7 +209,6 @@
   ```js
   fun.bind(thisArg, arg1, arg2, arg3 ...)
   
-  
   var btn = document.querySelector('input');
   
   	btn.onclick = function () {
@@ -220,7 +217,6 @@
   		window.setTimeout(function () {
   			this.disabled = false;
   		}.bind(btn) , 2000);
-          
   }
   ```
 
@@ -508,9 +504,7 @@ xhr.response            // ES5 中的新方法，推荐
   ```
 
   ```js
-      
-  
-  	// ** 变化 **
+      // ** 变化 **
   
   	var xhr = new XMLHttpRequest();
   
@@ -529,10 +523,13 @@ xhr.response            // ES5 中的新方法，推荐
   	// 发送同步请求，只有响应完成才会执行后续代码
   	xhr.send(null);
   	// 响应完成，开始调用load事件，未发现load事件，发现了 对 readystate 的监听 调用事件	
-  
-  
-  
   ```
+
+
+
+
+
+
 
 ## 其他方法
 
@@ -751,17 +748,17 @@ $.getScript()
 
 
 ```js
-    <!-- ------------------------------------------------------ 使用模板引擎-1.加载js文件 -->
+    <!-- ----------------------- 使用模板引擎-1.加载js文件 -->
     <script src="./assets/template-web.js"></script>
 
-    <!-- ------------------------------------------------------ 使用模板引擎-2.设置模板 -->
+    <!-- ----------------------- 使用模板引擎-2.设置模板 -->
     // 一定好指定 id 和 type（text/html）
     <script id="test" type="text/html">
         <h1>{{title}}</h1>
     </script>
 
     <script>
-        <!-- ------------------------------------------------- 使用模板引擎-3.调用template函数 -->
+        <!-- -------------------- 使用模板引擎-3.调用template函数 -->
         // var 模板和数据组合好的结果 = template(模板id, 模板中使用的数据必须是js对象类型);
         var data = {
             title: '这是模板引擎的例子'
@@ -778,9 +775,11 @@ $.getScript()
 ```
 
 
-> 
->
-> 
+
+
+
+
+
 ## 模板内可用的语法
 
 - 输出普通数据（字符串、数值等）
@@ -840,12 +839,12 @@ $.getScript()
         <p>我是{{nickname}}，我有一辆{{car}}，我今年{{age}}岁了</p>
         
         {{if age >= 18}}
-            <p>欢迎来玩~</p>
+            <p>欢迎~</p>
         {{else}}
-            <p>未成年人禁止进入</p>
+            <p>禁止进入</p>
         {{/if}}
         
-        <p>我有好几个女朋友，分别是：</p>
+        <p>我有好几个朋友，分别是：</p>
         <ul>
         
             {{each girls}}
@@ -915,7 +914,7 @@ $.getScript()
         // 2. 实例化FormData，将表单的DOM对象传入即可
         var fd = new FormData(form); // fd对象中包含了表单所有的值
 
-        // 将各项值发送给fd接口
+        // 将各项值发送给 '/fd' 接口
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/fd');
         
@@ -1025,6 +1024,19 @@ $.getScript()
 ```
 
 
+
+
+
+
+
+- 当页面中有 form 时，若要获取的数据只是文本值而没有文件，则可以使用，$('form').serialize() 方法，该方法与 Form Data 一样，也需要使用name属性，只是其获取到的结果会自动转换为字符串
+
+  ```js
+  // 获取到一个字符串， 类似于 “name=xzs&age=23” 这种格式，使用方便
+  $('form').serialize();
+  ```
+
+  
 
 
 
