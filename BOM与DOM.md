@@ -14,7 +14,7 @@
 - 变量与函数：
 
   - **所有的全局变量和全局函数都是window对象的属性和方法**；
-  - 在js代码里面，不使用var声明的变量，都是隐式全局变量，不推荐，因为如果不使用var声明，是**不会变量提升**的；
+  - 在js代码里面，不使用var声明的变量，都是隐式全局变量(直接挂载在window中)，不推荐，因为如果不使用var声明，是**不会变量提升**的；
 
   ```js
   // 1.所有window对象的属性和方法，直接省略  `window.`
@@ -39,6 +39,8 @@
   c;
   console.log(window.c);
   ```
+
+
 
 ## 方法：window.onload
 
@@ -80,6 +82,8 @@ clearInterval(timer);
 - 上面两个方法都是window对象下的方法；执行定时器，**都要先等待**
 - **即便只是函数内只有一条语句，也要使用函数包裹放入定时器内，不可以直接放入**
 
+
+
 ## 属性：location
 
 - location：负责管理浏览器地址栏相关的行为和信息的对象；
@@ -88,11 +92,36 @@ clearInterval(timer);
   - 重新设置，页面就会发生跳转；
 
 ```javascript
-	// 如果想要使用js进行跳转，只需要 location.href = 新的地址;
-	location.href = 'http://www.jd.com';
+// 如果想要使用js进行跳转，只需要 location.href = 新的地址;
+location.href = 'http://www.jd.com';
+等同于  location = 'http://www.jd.com';
+// 虽然 location 是一个只读属性
 ```
 
-- 方法：location.search();获取地址栏中 在 ？后的数据，包含？
+
+
+- 属性
+
+
+```
+hash        ---  从井号 (#) 开始的 URL（锚）
+host        ---  主机名和当前 URL 的端口号
+hostname    ---  当前 URL 的主机名
+href        ---  完整的 URL
+pathname    ---  当前 URL 的路径部分
+port        ---  当前 URL 的端口号
+protocol    ---  当前 URL 的协议
+search	    ---  从问号 (?) 开始的 URL（查询部分）
+```
+
+- 方法
+
+```js
+// 
+assign()	加载新的文档。
+reload()	重新加载当前文档。
+replace()	用新的文档替换当前文档。
+```
 
 
 
@@ -244,6 +273,8 @@ window 中是有 top（只读）和name属性的
 
 childnodes[],子元素节点（包含**文本**节点，）
 
+
+
 ## 兄弟元素
 
 ```js
@@ -251,11 +282,15 @@ childnodes[],子元素节点（包含**文本**节点，）
 元素.previousElementSibling - 得到上一个兄弟元素
 ```
 
+
+
 ## 父元素
 
 ```js
 元素.parentNode
 ```
+
+
 
 ## 获取节点样式
 
@@ -348,7 +383,7 @@ dom.style.width；
 
 - 三个传播阶段：**捕获、到达目标、冒泡**
 
-- 捕获：从根节点开始向着目标DOM节点一层一层的找，捕获是用户点击了那个DOM节点；
+- 捕获：从根节点开始向着目标DOM节点一层一层的找，捕获 用户点击了哪个DOM节点；
 
 - 冒泡：从目标节点到根节点；
 
@@ -408,11 +443,20 @@ dom.style.width；
     }
   ```
 
+
+
+## 阻止默认
+
+- e.preventDefault()
+  - prevent防止，阻止
+
+
+
 ## 事件委托
 
 - 为一个父元素设置事件监听，利用事件冒泡对子元素的点击做出响应
 - **关键点：获取点击的子元素**
-  - **e.target**                                        谁点击就是谁
+  - **e.target**                                         谁点击就是谁
   - **e.currentTarget**                           谁注册监听就是谁
   - 元素.nodeName                           获取元素的标签名，大写如 LI  UL   DIV     
 

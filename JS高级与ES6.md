@@ -35,6 +35,8 @@
 
 
 
+
+
 ## 静态、实例
 
 - 静态成员
@@ -73,7 +75,7 @@
 
 ## 原型与原型对象
 
-- 原型                实例对象的属性     fn.__ proto__
+- 原型                 实例对象的属性     fn.__ proto__
 - 原型对象         构造函数的属性     Fn.prototype
   - 注意两个调用不可以混淆了
 
@@ -167,9 +169,9 @@
 
   ## 三种方式
 
-- 这三种方式都是由 要执行的函数调用的，可以理解为正常的函数调用过程，只是因为要改变this指向，所以额外调用了一个方法
+- 这三种方式都是由 要**执行的函数调用的**，可以理解为正常的函数调用过程，只是因为要改变this指向，所以额外调用了一个方法
 
-- **.call()**
+- **.call()** 
 
   ```js
   fun.call(thisArg, arg1, arg2, ...)
@@ -191,7 +193,7 @@
   
   ```
 
-- **.apply()**
+- **.apply()** 
 
   ```js
   fun.apply(thisArg, [arg1, arg2, arg3 ....])
@@ -202,7 +204,7 @@
 
   
 
-- **.bind()**
+- **.bind()** 
 
   bind() 只会改变this的指向，不会调用，要想调用，需要赋值给一个变量再使用该变量进行调用
 
@@ -230,9 +232,9 @@
 
 - 类（class）继承更加方便
 - let 和 const
-
 - 箭头函数
 - 模板字符串
+- Set
 
 
 
@@ -290,11 +292,15 @@ class Father {
 
 
 
-- const 不能只声明不定义，使用const时必须赋值而且一旦定义，就不可改变，相当于一个**静态变量**
+- const 不能只声明不定义，使用const时必须赋值而且一旦定义，就不可改变，相当于一个**静态常量**
 
 
 
-## 箭头函数
+
+
+## 函数
+
+### 箭头函数
 
 - () => { } 
 
@@ -306,13 +312,13 @@ class Father {
   }
   () => {
   }
-  	// **匿名函数可以**赋值**给一个变量**
+  	// **匿名函数可以**赋**给一个变量**
   	var fn1 = function () {
   	}
       var fn2 = () => {
   	}
-      
-      
+  
+  
   // 具名函数
   function fn3(){
   }
@@ -344,7 +350,116 @@ class Father {
   }
   ```
 
+
+
+
+### 函数扩展
+
+- 在ES6中，若要设定一个函数形参的默认值，可以直接写在形参上
+
+  ```js
+  // 为函数设置默认值一定要在最后的几个参数中，若是为第一个参数设定，但后续参数不设置则没有意义
   
+  // ES5 中给参数设置默认值的变通做法
+  function fn(x, y) {
+      y = y || 'world';
+      console.log(x, y);
+  }
+  fn(1)
+  
+  
+  // ES6 中给函数设置默认值
+  function fn(x, y = 'world') {
+      console.log(x, y);
+  }
+  fn(2)
+  fn(2,3)
+  ```
+
+
+
+- rest 参数
+  - rest 参数是一个描述，并不是参数名为rest （位于**末位**，用 ... 修饰的参数）把这个参数叫做 rest 但不是参数名是 rest
+  - rest 参数：剩余参数，以 ... 修饰的最后一个参数，把多余的参数都放到一个数组中，可以替代 arguments 的使用
+
+```js
+// 使用rest 参数时，函数中不一定有多少形参，可能只有一个rest 参数，而rest参数一定是末位的参数
+
+// - 1 -
+// 参数很多，不确定多少个，可以使用剩余参数
+function fn(...values) {
+    console.log(values); // [6, 1, 100, 9, 10]
+}
+// 调用
+fn(6, 1, 100, 9, 10);
+
+// - 2 -
+function fn(a, b, ...values) {
+    console.log(a); // 6
+    console.log(b); // 1
+    console.log(values); // [100, 9, 10]
+}
+// 调用
+console.log(fn(6, 1, 100, 9, 10));
+```
+
+
+
+## 内置对象扩展
+
+- Array 的扩展
+- String 的扩展
+- Number 的扩展
+
+
+
+ **Array 的扩展**
+
+- ...Array
+- Array.from()
+- forEach()                    (value, index, arr)
+
+```js
+// 扩展运算符                ...
+// 合并两个数组
+let arr1 = [1, 2];
+let arr2 = [3, 4];
+let arr3 = [...arr1, ...arr2];
+console.log(arr3); // [1, 2, 3, 4]
+// 也可以用于求算最大值, max 内的参数之单个的数字
+Math.max(...arr);
+
+// 数组转化 Array.from
+// 伪数组中一定要有 length 属性，否则转为空数组，
+// 转化后数组长度有length，决定，值太多会丢弃。
+
+let fakeArr = {
+  0: 'a',
+  1: 'b',
+  2: 'c',
+  length: 3
+};
+
+let arr = Array.from(fakeArr);
+console.log(arr); // ['a', 'b', 'c']
+
+// 遍历
+// [xxx,xxx].forEach(function (value, index, arr) {
+    // value 表示数组的值
+    // index 表示数组的下标、索引
+    // arr 表示当前的数组
+// });
+```
+
+
+
+**String扩展**
+
+- `includes` 
+- `endsWith()` 以什么东西结尾
+- `startWith()` 以什么东西开头
+
+
 
 ## 模板字符串
 
@@ -357,16 +472,156 @@ class Father {
   			<li>${item}</li> `
   ```
 
+
+
+
+## Set
+
+- ES6中新增的数据，类似于数组 **伪数组**，但其内部没有重复值，都是唯一值
+
+- 可用于数组去重，是伪数组，要重新转化为数组
+
+- 其本身是一个构造函数
+
+  ```js
+  // 使用方法，不传参/数组/字符串 
+  // 1 - 不传参数
+  let s = new Set();
+  
+  // 重复的添加也没用，会自动剔除
+  s.add(3);
+  s.add(3);
+  s.add(6);
+  s.add(9);
+  
+  s.size       // 属性，成员个数
+  
+  s.delete(6); // 返回布尔值 ，是否删除
+  s.has(6);    // 返回布尔值 ，是否存在
+  s.clear()    // 清空
+  
+  // for...in  循环中的 i 表示数组的下标，或对象的属性名 consolo.log(s[i])
+  // for...of  循环中的 i 表示数组的值，或对象的值      consolo.log(i)
+  
+  
+  // 2 - 传数组
+  let set = new Set([1, 2, 1, 5, 1, 6]);
+  console.log(set); //Set(4) {1, 2, 5, 6}
+  // 数组去重 set之后得到的是一个伪数组，要转成数组
+  let arr = [...set]; // 方式一
+  console.log(Array.from(set)); // Array.from是将伪数组变为数组;方式二
+  console.log(arr); // [1, 2, 5, 6]
+  
+  
+  // 3 - 传字符串
+  // 完成字符串去重
+  let str = new Set('ababbc'); // 结果是{a,b,c} 一个伪数组
+  let str = [...new Set('ababbc')].join('');
+  console.log(str); // abc
+  ```
+
   
 
+## 数据解构
 
+ES 6 允许按照一定**模式**，从数组和对象中提取值，对变量进行赋值，这被称为解构（`Destructuring`）
+
+- 1 - 数组的解构
+
+  ```js
+  // 一 一 对应 ，多对少，少对多
+  let arr = [5, 9, 10， ...... ];
+  let [a, b, c，......] = arr;
+  console.log(a, b, c); // 输出 5 9 10
+  // 对应：一一对应的取值
+  // 多对少：underfined
+  // 少对多：取对应的几位，
+  //      ：可为空进行占位[a, , , b,c,,]
+  // - 剩余值：...c      []a,b,...c] c会重组为一个新的数组，包含剩余元素
+  
+  // 复杂的嵌套，只要符合模式，即可解构
+  let arr = ['zhangsan', 18, ['175cm', '65kg']];
+  let [, , [a, b]] = arr;
+  console.log(a, b); // 175cm 65kg
+  ```
+
+
+
+- 2 - 对象的解构
+
+  ```js
+  // 对象的解构
+  // 默认要求变量名和属性名一样， 可用 ：修改
+  let { foo, bar } = {foo: 'aaa', bar: 'bbb'};
+  console.log(foo, bar); // aaa, bbb
+  
+  let {a, c} = {a: 'hello', b: 'world'};
+  console.log(a, c); // hello, undefined
+  let {a, b:c} = {a: 'hello', b: 'world'};
+  console.log(a, c); // hello, world
+  
+  
+  // 由于对象是无序表，所以不需要一一对应的顺序
+  let {b} = {a: 'hello', b: 'world'};
+  console.log(b); // world
+  
+  // 剩余值与复杂类型与数组的解构一致
+  ```
+
+- 这种解构的新方法用在复杂的类型中更合适(而且可以省一次写法)
+
+  ```js
+  // 一个数据的类型很复杂，而且并不需要获取到所有的值，仅仅只需要其中的一小部分时，这这样的情况下体现了 **极大的便利性,而且节省了空间**
+  let obj = [{
+      hero:1,
+      age:{
+          files:1
+      }
+  },{},{}];
+  
+  let [{age}] =obj;
+  console.log(age);// 已经取到了,age 里的files 不能这么取了，只能 age.files
+  // data 是一个包含 hero属性的对象
+  // let hero = data.hero
+let { hero } = data
+  ```
+  
+  
+
+## 定义对象
+
+- 在ES6中定义的对象，若是其中的属性值与属性名一致，则可以直接写属性名
+
+- 函数可以省略冒号
+
+  ```js
+  // ES5中定义对象
+  {
+      name : name,
+      age:age,
+      sex:'男'，
+      fn : () => {}
+  }
+  
+  // ES6中定义对象
+  {
+      name,
+      age,
+      sex:'男',
+      fn () {}
+  }
+  ```
+
+  
 
 
 
 # Ajax
 
 - ajax是一门技术，用于从后台服务器中获取数据
-- 其中有两种获取方式 get 和 pos
+- 其中有两种获取方式 get 和 post
+
+
 
 ## readyState属性
 
@@ -384,7 +639,7 @@ class Father {
 
   
 
-- **正是因为 ajax 的这几个阶段，所以在开始进行数据处理的时候要清楚 xhr.response 内是否有数据，是否已经接收到了数据，要加入时间的观念**
+- **正是因为 ajax 的这几个阶段，所以在开始进行数据处理的时候要清楚 xhr.response 内是否有数据，是否已经接收到了数据，要加入时间的观念**  ajax是异步的
 
   
 
@@ -431,7 +686,7 @@ xhr.send(null);
 
 // 取得响应内容, 两种方法都可以使用
 xhr.responseText
-xhr.response            // ES5 中的新方法，推荐
+xhr.response            // ES6 中的新方法，推荐
 
 
 // 之后的步骤就是对数据 xhr.response 进行操作，根据其返回的数据进行不同的操作
@@ -449,6 +704,8 @@ xhr.onreadystatechange = function () {
         // 一般关注这一阶段
     }
 }
+
+// 注册监听事件要在ajax请求发起之前，防止在响应已经回来但是监听事件还没有注册
 ```
 
 
@@ -468,7 +725,7 @@ xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');   // 
 
 // 调用 open 方法，传入 请求类型（不区分大小写） 和 请求地址 和 **是否异步** true 异步 或 false 同步
 // post 方式不在 url 上填数据，在 send 中设置
-xhr.open('GET', 'URL');
+xhr.open('POST', 'URL');
 
 // 发送请求,  一个字符串，其中有多个键值对时使用 & 连接，键名称要与后台对应'name=zhansan&age=24&color=red'
 xhr.send('符合后台要求的字符串');
@@ -535,16 +792,24 @@ xhr.response            // ES5 中的新方法，推荐
 
 - onload                --  当readyState等于4的时候触发。只有请求成功了才触发。
 - onprogress         --  当readyState等于3的时候触发（数据正在返回途中的时候触发）
-- onloadstart()       --  当开始发送请求的时候触发，要放到send之前
-- onloadend()        --  当请求响应过程结束的时候触发。无论成功还是失败都会触发。
+- onloadstart()      --  当开始发送请求的时候触发，要放到send之前
+- onloadend()       --  当请求响应过程结束的时候触发。无论成功还是失败都会触发。
+
+
 
 ## responseType
 
 - 预期服务器返回的数据的类型，当设置了该属性后，通过 `response` 接收数据的时候，会根据该属性的值来自动处理结果为JS能够识别的数据。
-  - “”  -- 空，表示文本，和text一样。空为默认值
+  - “  ”  -- 空，表示文本，和text一样。空为默认值
   - text -- 文本
   - json -- JSON格式数据
   - document -- 文档对象。当服务器返回的结果是XML类型的时候，需要指定为document
+
+## `xhr = null`
+
+- 当要重复使用同一个xhr对象之前，最好先置空xhr对象，防止xhr对象中有一些默认设置不匹配
+
+
 
 ## jQuery-Ajax
 
@@ -633,7 +898,6 @@ xhr.response            // ES5 中的新方法，推荐
 - **四个参数，接口，数据，回调函数，数据类型** 
 
 ```js
-  
   <script src="./jquery.js"></script>
   <script>
       // $.get(请求的接口, 发送到服务器的数据, 用于处理服务器返回结果的函数, 预期服务器返回数据的类型);
@@ -657,12 +921,11 @@ xhr.response            // ES5 中的新方法，推荐
 
 ## 全局处理事件
 
-- $.ajaxSetup({事件: 处理函数, 事件:处理函数, ... });
+- $.ajaxSetup({事件: 处理函数, 事件:处理函数, ... })
   - 每次Ajax请求都需要的事件，比如给一个请求响应过程进度提示，可以使用全局事件处理。反过来说，通过全局事件处理的事件，**后续**的每个ajax请求都会触发。
 
 ```js
-    
-	// 设置全局事件处理
+    // 设置全局事件处理
     $.ajaxSetup({
         // 设置发送请求前的事件
         beforeSend: function () {
@@ -682,7 +945,7 @@ xhr.response            // ES5 中的新方法，推荐
 - 扩展（加载进度条）
 
 ```js
-	// 要先引包，css 和 js    
+	// 要先引包，css 和 js
 
 	$(document).on('turbolinks:click', function() {
         NProgress.start();
@@ -884,8 +1147,6 @@ $.getScript()
   
 
 可以在两种情况下工作
-
-
 
 - 第一种情况，（有form标签）
 

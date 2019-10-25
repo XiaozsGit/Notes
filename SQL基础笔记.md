@@ -2,7 +2,7 @@
 
 ## 1 查询 （select）
 
-### select （要求的查询项） from （表名） where （表达式 附加条件）order by （要求项）（desc）；
+- ### select （要求的查询项） from （表名） where （表达式 附加条件）order by （要求项）（desc）；
 
 - （要求的查询项）： 项目名     （或） 表名.项目名  （或）  函数（项目名）
 
@@ -26,4 +26,11 @@
   **2、求至少选修1号课和2号课的学生的学号**
 
   select  x.学号  from  选课x,  选课y  where  x.学号 = y.学号  and  x.课号 = "1"  and  y.课号="2"
+
+
+
+- limit n,m   从n开始查，查m个,n从0开始 (也就是说，要得到 6 - 10 条数据，那么对应 limit 5, 5 )
+
+- order by desc(asc) 要放到 limit 前面 where 后 
+- 从查询的逻辑关系里找到命令的前后关系
 
