@@ -29,8 +29,7 @@
 
 
 
-- limit n,m   从n开始查，查m个,n从0开始 (也就是说，要得到 6 - 10 条数据，那么对应 limit 5, 5 )
-
+- limit n,m   从n开始查，查m个,n从0开始 (也就是说，要得到 6 - 10 条数据，那么对应 limit 5, 5 
 - order by desc(asc) 要放到 limit 前面 where 后 
 - 从查询的逻辑关系里找到命令的前后关系
 
