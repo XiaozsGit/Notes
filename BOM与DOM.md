@@ -1,4 +1,4 @@
-# BOM
+# **BOM**
 
 - BOM： browser object model，是把**浏览器看成是一个对象**，就是学习浏览器对象的各种方法和属性；
 - 浏览器对象：**window对象**；

@@ -84,5 +84,11 @@ app.use(
 // res.send(json对象，默认200状态码)
 
 // res.status(404).send('发送指定状态码')
-
 ```
+
+
+
+
+
+
+
